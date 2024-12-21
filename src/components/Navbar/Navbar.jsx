@@ -15,25 +15,28 @@ export const Navlinks = [
     link: "/#cars",
   },
   {
-    id: 1,
+    id: 3,
     name: "ABOUT",
     link: "/#about",
   },
+
   {
-    id: 1,
-    name: "Login",
+    id: 5,
+    name: "SIGN in",
+    link: "/signin", // Link to the Sign Up page
   },
 ];
+
 const Navbar = ({ theme, setTheme }) => {
   const [showMenu, setShowMenu] = useState(false);
 
   const toggleMenu = () => {
     setShowMenu(!showMenu);
   };
+
   return (
     <div
-      className="relative z-10 shadow-md w-full dark:bg-black dark:text-white duration-300
-    "
+      className="relative z-10 shadow-md w-full dark:bg-black dark:text-white duration-300"
     >
       <div className="container py-2 md:py-0">
         <div className="flex justify-between items-center">
@@ -46,13 +49,13 @@ const Navbar = ({ theme, setTheme }) => {
                 <li key={id} className="py-4">
                   <a
                     href={link}
-                    className=" text-lg font-medium  hover:text-primary py-2 hover:border-b-2 hover:border-primary transition-colors duration-500  "
+                    className="text-lg font-medium hover:text-primary py-2 hover:border-b-2 hover:border-primary transition-colors duration-500"
                   >
                     {name}
                   </a>
                 </li>
               ))}
-              {/* DarkMode feature implement */}
+              {/* DarkMode feature */}
               {theme === "dark" ? (
                 <BiSolidSun
                   onClick={() => setTheme("light")}
@@ -66,9 +69,9 @@ const Navbar = ({ theme, setTheme }) => {
               )}
             </ul>
           </nav>
-          {/* Mobile view  */}
-          <div className="flex items-center gap-4 md:hidden ">
-            {/* dark  mode */}
+          {/* Mobile view */}
+          <div className="flex items-center gap-4 md:hidden">
+            {/* Dark mode */}
             {theme === "dark" ? (
               <BiSolidSun
                 onClick={() => setTheme("light")}
@@ -84,7 +87,7 @@ const Navbar = ({ theme, setTheme }) => {
             {showMenu ? (
               <HiMenuAlt1
                 onClick={toggleMenu}
-                className=" cursor-pointer transition-all"
+                className="cursor-pointer transition-all"
                 size={30}
               />
             ) : (
