@@ -16,6 +16,10 @@ import Footer from "./components/Footer/Footer";
 import SignIn from "./components/SignIn/SignIn";
 import SignUp from "./components/SignUp/SignUp";
 
+// Dashboard imports
+import AdminDashboard from "./components/AdminDashboard";  // Admin Dashboard Component
+import UserDashboard from "./components/UserDashboard";    // User Dashboard Component
+
 const App = () => {
   // Dark mode setup
   const [theme, setTheme] = useState(
@@ -66,6 +70,10 @@ const App = () => {
           />
           <Route path="/signin" element={<SignIn />} />
           <Route path="/signup" element={<SignUp />} />
+          
+          {/* Routes for user and admin dashboards */}
+          <Route path="/admin-dashboard" element={<AdminDashboard />} />
+          <Route path="/user-dashboard" element={<UserDashboard />} />
         </Routes>
       </div>
     </Router>
