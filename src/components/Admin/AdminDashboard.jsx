@@ -1,5 +1,6 @@
 // src/components/AdminDashboard.jsx
 import React from "react";
+import DashboardLayout from "../Layouts/DashboardLayout";
 
 const AdminDashboard = () => {
   return (

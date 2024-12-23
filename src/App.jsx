@@ -17,11 +17,11 @@ import SignIn from "./components/SignIn/SignIn";
 import SignUp from "./components/SignUp/SignUp";
 
 // Dashboard imports
-import AdminDashboard from "./components/AdminDashboard";  // Admin Dashboard Component
-import UserDashboard from "./components/UserDashboard";    // User Dashboard Component
+import AdminDashboard from "./components/Admin/AdminDashboard";
+import UserDashboard from "./components/User/UserDashboard";
+import DashboardLayout from "./components/Layouts/DashboardLayout";
 
 const App = () => {
-  // Dark mode setup
   const [theme, setTheme] = useState(
     localStorage.getItem("theme") ? localStorage.getItem("theme") : "light"
   );
@@ -37,7 +37,6 @@ const App = () => {
     }
   }, [theme]);
 
-  // Initialize AOS for animations
   useEffect(() => {
     AOS.init({
       offset: 100,
@@ -51,12 +50,13 @@ const App = () => {
   return (
     <Router>
       <div className="bg-white dark:bg-black dark:text-white text-black overflow-x-hidden">
-        <Navbar theme={theme} setTheme={setTheme} />
         <Routes>
+          {/* Main Theme Routes */}
           <Route
             path="/"
             element={
               <>
+                <Navbar theme={theme} setTheme={setTheme} />
                 <Hero theme={theme} />
                 <About />
                 <Services />
@@ -70,10 +70,24 @@ const App = () => {
           />
           <Route path="/signin" element={<SignIn />} />
           <Route path="/signup" element={<SignUp />} />
-          
-          {/* Routes for user and admin dashboards */}
-          <Route path="/admin-dashboard" element={<AdminDashboard />} />
-          <Route path="/user-dashboard" element={<UserDashboard />} />
+
+          {/* Dashboard Routes with Separate Themes */}
+          <Route
+            path="/user-dashboard"
+            element={
+              <DashboardLayout>
+                <UserDashboard />
+              </DashboardLayout>
+            }
+          />
+          <Route
+            path="/admin-dashboard"
+            element={
+              <DashboardLayout>
+                <AdminDashboard />
+              </DashboardLayout>
+            }
+          />
         </Routes>
       </div>
     </Router>

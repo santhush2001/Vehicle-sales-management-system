@@ -1,5 +1,6 @@
 // src/components/UserDashboard.jsx
 import React from "react";
+import DashboardLayout from "../Layouts/DashboardLayout";
 
 const UserDashboard = () => {
   return (
