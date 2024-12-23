@@ -51,7 +51,11 @@ const DashboardLayout = ({ children }) => {
           theme === "dark" ? "bg-gray-800" : "bg-gray-200"
         } flex justify-between items-center`}
       >
-        <h1 className="text-2xl font-bold">Dashboard</h1>
+        {/* Logo */}
+        <h1 className="text-3xl font-extrabold text-primary font-sans tracking-tight">
+          Auto <span className="text-secondary">Hub</span>
+        </h1>
+
         <div className="flex items-center gap-4">
           {/* Hamburger Menu for Mobile */}
           <div className="md:hidden">
@@ -97,35 +101,50 @@ const DashboardLayout = ({ children }) => {
         </div>
       </header>
 
+      
       {/* Responsive Menu */}
-      {menuOpen && (
-        <div
-          className={`p-4 ${
-            theme === "dark" ? "bg-gray-700" : "bg-gray-100"
-          } md:hidden flex flex-col items-start gap-4`}
-        >
-          <button
-            onClick={toggleTheme}
-            className={`px-4 py-2 rounded ${
-              theme === "dark"
-                ? "bg-indigo-600 hover:bg-indigo-500 text-white"
-                : "bg-indigo-400 hover:bg-indigo-300 text-black"
-            }`}
-          >
-            Toggle Theme
-          </button>
-          <button
-            onClick={handleLogout}
-            className={`px-4 py-2 rounded ${
-              theme === "dark"
-                ? "bg-red-600 hover:bg-red-500 text-white"
-                : "bg-red-400 hover:bg-red-300 text-black"
-            }`}
-          >
-            Logout
-          </button>
-        </div>
+{menuOpen && (
+  <div
+    className={`p-4 ${
+      theme === "dark" ? "bg-gray-700" : "bg-gray-100"
+    } md:hidden flex flex-col items-start gap-4`}
+  >
+    <div
+      onClick={toggleTheme}
+      className="flex items-center gap-2 cursor-pointer px-4 py-2 rounded"
+    >
+      {theme === "dark" ? (
+        <BiSolidSun
+          className={`text-2xl ${
+            theme === "dark" ? "text-white" : "text-black"
+          }`}
+          title="Switch to Light Mode"
+        />
+      ) : (
+        <BiSolidMoon
+          className={`text-2xl ${
+            theme === "dark" ? "text-white" : "text-black"
+          }`}
+          title="Switch to Dark Mode"
+        />
       )}
+      <span className={`${theme === "dark" ? "text-white" : "text-black"}`}>
+        {theme === "dark" ? "" : ""}
+      </span>
+    </div>
+    <button
+      onClick={handleLogout}
+      className={`px-4 py-2 rounded ${
+        theme === "dark"
+          ? "bg-red-600 hover:bg-red-500 text-white"
+          : "bg-red-400 hover:bg-red-300 text-black"
+      }`}
+    >
+      Logout
+    </button>
+  </div>
+)}
+
 
       <main className="p-6">{children}</main>
     </div>
