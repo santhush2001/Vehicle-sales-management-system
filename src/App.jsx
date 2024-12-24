@@ -22,6 +22,8 @@ import UserDashboard from "./components/User/UserDashboard";
 
 // New Component Import
 import MyCars from "./components/User/MyCars"; // Import the MyCars component
+import AddVehicle from "./components/Admin/AddVehicle";
+import ViewVehicle from "./components/Admin/ViewVehicle";
 
 // Layout Component
 const Layout = ({ theme, setTheme, children }) => {
@@ -103,11 +105,16 @@ const App = () => {
               
             }
           />
-
+           
           {/* Routes without Navbar */}
           <Route path="/admin-dashboard" element={<AdminDashboard />} />
           <Route path="/user-dashboard" element={<UserDashboard />} />
           <Route path="/user-dashboard/MyCars" element={<MyCars />} />
+          <Route path="/admin-dashboard/AddVehicle" element={<AddVehicle />} />
+          <Route path="/Admin/AddVehicle" element={<AddVehicle />} />
+          <Route path="/Admin/ViewVehicle" element={<ViewVehicle />} />
+
+
 
         </Routes>
       </div>

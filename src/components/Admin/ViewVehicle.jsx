@@ -1,18 +1,41 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { BiSolidSun, BiSolidMoon } from "react-icons/bi";
 import { HiMenuAlt3, HiMenuAlt1 } from "react-icons/hi"; // Icons for responsive menu
 
-const AdminDashboard = () => {
+const ViewVehicle = () => {
   const [theme, setTheme] = useState(localStorage.getItem("adminTheme") || "dark");
-  const [menuOpen, setMenuOpen] = useState(false); // State for responsive menu
-  const [dropdownOpen, setDropdownOpen] = useState(false); // State for dropdown menu
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [vehicles, setVehicles] = useState([]); // State to store all vehicles
   const navigate = useNavigate();
 
-  // Update the theme in localStorage and apply the class
+  // Fetch all vehicles from API
+  useEffect(() => {
+    const fetchVehicles = async () => {
+      try {
+        const response = await fetch("http://127.0.0.1:8000/api/vehicles");
+        if (response.ok) {
+          const data = await response.json();
+          setVehicles(data); // Set the vehicles data to state
+        } else {
+          alert("Failed to fetch vehicles");
+        }
+      } catch (error) {
+        console.error("Error:", error);
+        alert("An error occurred");
+      }
+    };
+
+    fetchVehicles();
+  }, []);
+
   const toggleTheme = () => {
     setTheme((prevTheme) => (prevTheme === "dark" ? "light" : "dark"));
     localStorage.setItem("adminTheme", theme === "dark" ? "light" : "dark");
+  };
+
+  const toggleMenu = () => {
+    setMenuOpen(!menuOpen);
   };
 
   const handleLogout = () => {
@@ -21,21 +44,22 @@ const AdminDashboard = () => {
     navigate("/signin");
   };
 
-  const toggleMenu = () => {
-    setMenuOpen(!menuOpen);
-  };
-
-  const toggleDropdown = () => {
-    setDropdownOpen(!dropdownOpen);
-  };
+  if (vehicles.length === 0) {
+    return <div>Loading...</div>; // Show loading message until the vehicles data is fetched
+  }
 
   return (
     <div
-      className={`dashboard-layout ${theme === "dark" ? "bg-gray-900 text-white" : "bg-white text-gray-900"} min-h-screen`}
+      className={`dashboard-layout ${
+        theme === "dark" ? "bg-gray-900 text-white" : "bg-white text-gray-900"
+      } min-h-screen`}
     >
       {/* Navigation Bar */}
-      <nav className={`flex items-center justify-between p-4 ${theme === "dark" ? "bg-gray-800" : "bg-gray-200"}`}>
-        {/* Logo */}
+      <nav
+        className={`flex items-center justify-between p-4 ${
+          theme === "dark" ? "bg-gray-800" : "bg-gray-200"
+        }`}
+      >
         <h1 className="text-3xl font-extrabold text-primary tracking-tight">
           Admin <span className="text-secondary">Dashboard</span>
         </h1>
@@ -44,46 +68,33 @@ const AdminDashboard = () => {
         <div className="hidden md:flex items-center gap-6">
           <button
             onClick={() => navigate("/admin-dashboard")}
-            className={`${theme === "dark" ? "text-white hover:text-gray-300" : "text-black hover:text-gray-700"}`}
+            className={`${
+              theme === "dark" ? "text-white hover:text-gray-300" : "text-black hover:text-gray-700"
+            }`}
           >
             Home
           </button>
-
-          {/* Manage Vehicle Dropdown */}
-          <div className="relative">
-            <button
-              onClick={toggleDropdown}
-              className={`${theme === "dark" ? "text-white hover:text-gray-300" : "text-black hover:text-gray-700"}`}
-            >
-              Manage Vehicle
-            </button>
-            {dropdownOpen && (
-              <div className="absolute top-8 left-0 bg-white border border-gray-300 rounded shadow-md z-10">
-                <button
-                  onClick={() => navigate("/Admin/AddVehicle")}
-                  className="block px-4 py-2 text-gray-700 hover:bg-gray-200"
-                >
-                  Add Vehicle
-                </button>
-                <button
-                  onClick={() => navigate("/Admin/ViewVehicle")}
-                  className="block px-4 py-2 text-gray-700 hover:bg-gray-200"
-                >
-                  View Vehicle
-                </button>
-              </div>
-            )}
-          </div>
-
+          <button
+            onClick={() => navigate("/Admin/AddVehicle")}
+            className={`${
+              theme === "dark" ? "text-white hover:text-gray-300" : "text-black hover:text-gray-700"
+            }`}
+          >
+            Manage Vehicle
+          </button>
           <button
             onClick={() => navigate("/manage-users")}
-            className={`${theme === "dark" ? "text-white hover:text-gray-300" : "text-black hover:text-gray-700"}`}
+            className={`${
+              theme === "dark" ? "text-white hover:text-gray-300" : "text-black hover:text-gray-700"
+            }`}
           >
             Manage Users
           </button>
           <button
             onClick={() => navigate("/reports")}
-            className={`${theme === "dark" ? "text-white hover:text-gray-300" : "text-black hover:text-gray-700"}`}
+            className={`${
+              theme === "dark" ? "text-white hover:text-gray-300" : "text-black hover:text-gray-700"
+            }`}
           >
             Reports
           </button>
@@ -123,7 +134,9 @@ const AdminDashboard = () => {
       {/* Mobile Menu */}
       {menuOpen && (
         <div
-          className={`flex flex-col p-4 ${theme === "dark" ? "bg-gray-700" : "bg-gray-100"} md:hidden`}
+          className={`flex flex-col p-4 ${
+            theme === "dark" ? "bg-gray-700" : "bg-gray-100"
+          } md:hidden`}
         >
           <button
             onClick={() => navigate("/admin-dashboard")}
@@ -169,13 +182,40 @@ const AdminDashboard = () => {
           </button>
         </div>
       )}
+<main className="p-6">
+  <h2 className="text-2xl font-semibold">View All Vehicles</h2>
+  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+    {vehicles.map((vehicle) => (
+      <div key={vehicle.id} className="border p-4 rounded">
+        <h3 className="text-xl font-semibold">{vehicle.make} {vehicle.model}</h3>
+        <p><strong>Year:</strong> {vehicle.year}</p>
+        <p><strong>Price:</strong> ${vehicle.price}</p>
+        <p><strong>Mileage:</strong> {vehicle.mileage} miles</p>
+        
+        {/* Image display */}
+        {vehicle.image && (
+          <div className="mt-2">
+            <img
+              src={`http://127.0.0.1:8000/store/${vehicle.image}`}
+              alt={`${vehicle.make} ${vehicle.model}`}
+              className="w-full h-auto"
+            />
+          </div>
+        )}
 
-      {/* Main Content */}
-      <main className="p-6">
-        <h2 className="text-2xl font-semibold">Welcome to the Admin Dashboard</h2>
-      </main>
+        <button
+          onClick={() => navigate(`/vehicle/${vehicle.id}`)}
+          className="mt-2 text-blue-500 hover:text-blue-700"
+        >
+          View Details
+        </button>
+      </div>
+    ))}
+  </div>
+</main>
+
     </div>
   );
 };
 
-export default AdminDashboard;
+export default ViewVehicle;
