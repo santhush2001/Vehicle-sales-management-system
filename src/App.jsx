@@ -19,11 +19,23 @@ import SignUp from "./components/SignUp/SignUp";
 // Dashboard imports
 import AdminDashboard from "./components/Admin/AdminDashboard";
 import UserDashboard from "./components/User/UserDashboard";
-import DashboardLayout from "./components/Layouts/DashboardLayout";
+
+// New Component Import
+import MyCars from "./components/User/MyCars"; // Import the MyCars component
+
+// Layout Component
+const Layout = ({ theme, setTheme, children }) => {
+  return (
+    <>
+      <Navbar theme={theme} setTheme={setTheme} />
+      {children}
+    </>
+  );
+};
 
 const App = () => {
   const [theme, setTheme] = useState(
-    localStorage.getItem("theme") ? localStorage.getItem("theme") : "light"
+    localStorage.getItem("theme") || "light"
   );
   const element = document.documentElement;
 
@@ -51,12 +63,11 @@ const App = () => {
     <Router>
       <div className="bg-white dark:bg-black dark:text-white text-black overflow-x-hidden">
         <Routes>
-          {/* Main Theme Routes */}
+          {/* Routes with Navbar */}
           <Route
             path="/"
             element={
-              <>
-                <Navbar theme={theme} setTheme={setTheme} />
+              <Layout theme={theme} setTheme={setTheme}>
                 <Hero theme={theme} />
                 <About />
                 <Services />
@@ -65,29 +76,39 @@ const App = () => {
                 <AppStoreBanner />
                 <Contact />
                 <Footer />
-              </>
+              </Layout>
             }
           />
-          <Route path="/signin" element={<SignIn />} />
-          <Route path="/signup" element={<SignUp />} />
+          <Route
+            path="/signin"
+            element={
+              <Layout theme={theme} setTheme={setTheme}>
+                <SignIn />
+              </Layout>
+            }
+          />
+          <Route
+            path="/signup"
+            element={
+              <Layout theme={theme} setTheme={setTheme}>
+                <SignUp />
+              </Layout>
+            }
+          />
+          <Route
+            path="/User/MyCars"
+            element={
+              
+                <MyCars />
+              
+            }
+          />
 
-          {/* Dashboard Routes with Separate Themes */}
-          <Route
-            path="/user-dashboard"
-            element={
-              <DashboardLayout>
-                <UserDashboard />
-              </DashboardLayout>
-            }
-          />
-          <Route
-            path="/admin-dashboard"
-            element={
-              <DashboardLayout>
-                <AdminDashboard />
-              </DashboardLayout>
-            }
-          />
+          {/* Routes without Navbar */}
+          <Route path="/admin-dashboard" element={<AdminDashboard />} />
+          <Route path="/user-dashboard" element={<UserDashboard />} />
+          <Route path="/user-dashboard/MyCars" element={<MyCars />} />
+
         </Routes>
       </div>
     </Router>

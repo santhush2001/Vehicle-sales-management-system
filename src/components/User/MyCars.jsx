@@ -3,10 +3,17 @@ import { useNavigate } from "react-router-dom";
 import { BiSolidSun, BiSolidMoon } from "react-icons/bi";
 import { HiMenuAlt3, HiMenuAlt1 } from "react-icons/hi";
 
-const UserDashboard = () => {
+const MyCars = () => {
   const [theme, setTheme] = useState(localStorage.getItem("userTheme") || "light");
   const [menuOpen, setMenuOpen] = useState(false); // State for responsive menu
   const navigate = useNavigate();
+
+  // Dummy data for cars
+  const cars = [
+    { id: 1, make: "Toyota", model: "Camry", year: 2020, color: "Blue" },
+    { id: 2, make: "Honda", model: "Civic", year: 2021, color: "Red" },
+    { id: 3, make: "Ford", model: "Mustang", year: 2019, color: "Black" },
+  ];
 
   // Toggle theme and store in localStorage
   const toggleTheme = () => {
@@ -15,13 +22,9 @@ const UserDashboard = () => {
     localStorage.setItem("userTheme", newTheme);
   };
 
-  const handleLogout = () => {
-    // Clear token and role from localStorage
-    localStorage.removeItem("auth_token");
-    localStorage.removeItem("role");
-
-    // Redirect to the login page
-    navigate("/signin");
+  const goBackToDashboard = () => {
+    // Navigate back to the user dashboard
+    navigate("/user-dashboard");
   };
 
   const toggleMenu = () => {
@@ -41,7 +44,7 @@ const UserDashboard = () => {
       >
         {/* Logo */}
         <h1 className="text-3xl font-extrabold text-primary font-sans tracking-tight">
-          Auto <span className="text-secondary">Hub</span>
+          My <span className="text-secondary">Cars</span>
         </h1>
 
         <div className="flex items-center gap-4">
@@ -60,7 +63,7 @@ const UserDashboard = () => {
             )}
           </div>
 
-          {/* Theme Toggle and Logout for Desktop */}
+          {/* Theme Toggle and Back to Dashboard for Desktop */}
           <div className="hidden md:flex items-center gap-4">
             {theme === "dark" ? (
               <BiSolidSun
@@ -76,14 +79,14 @@ const UserDashboard = () => {
               />
             )}
             <button
-              onClick={handleLogout}
+              onClick={goBackToDashboard}
               className={`px-4 py-2 rounded ${
                 theme === "dark"
-                  ? "bg-red-600 hover:bg-red-500 text-white"
-                  : "bg-red-400 hover:bg-red-300 text-black"
+                  ? "bg-blue-600 hover:bg-blue-500 text-white"
+                  : "bg-blue-400 hover:bg-blue-300 text-black"
               }`}
             >
-              Logout
+              Back to User Dashboard
             </button>
           </div>
         </div>
@@ -120,32 +123,42 @@ const UserDashboard = () => {
             </span>
           </div>
           <button
-            onClick={handleLogout}
+            onClick={goBackToDashboard}
             className={`px-4 py-2 rounded ${
               theme === "dark"
-                ? "bg-red-600 hover:bg-red-500 text-white"
-                : "bg-red-400 hover:bg-red-300 text-black"
+                ? "bg-blue-600 hover:bg-blue-500 text-white"
+                : "bg-blue-400 hover:bg-blue-300 text-black"
             }`}
           >
-            Logout
+            Back to User Dashboard
           </button>
         </div>
       )}
 
       <main className="p-6">
-        {/* User Dashboard Content */}
-        <h2 className="text-2xl font-semibold">
-          Welcome to the User Dashboard
-        </h2>
-        <button
-          onClick={() => navigate("/User/myCars")}
-          className="mt-4 px-6 py-3 bg-blue-500 text-white rounded-lg hover:bg-blue-400"
-        >
-          View My Cars
-        </button>
+        <h2 className="text-2xl font-semibold">Your Cars</h2>
+
+        {/* Cars List */}
+        <div className="mt-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {cars.map((car) => (
+            <div
+              key={car.id}
+              className="p-4 bg-white shadow-lg rounded-lg dark:bg-gray-800 dark:text-white"
+            >
+              <h3 className="text-xl font-semibold">{`${car.year} ${car.make} ${car.model}`}</h3>
+              <p className="mt-2">Color: {car.color}</p>
+              <button
+                onClick={() => alert(`Viewing details for ${car.make} ${car.model}`)}
+                className="mt-4 px-6 py-3 bg-blue-500 text-white rounded-lg hover:bg-blue-400"
+              >
+                View Details
+              </button>
+            </div>
+          ))}
+        </div>
       </main>
     </div>
   );
 };
 
-export default UserDashboard;
+export default MyCars;
