@@ -1,10 +1,54 @@
-import React from "react";
+import React, { useState } from "react";
 import { motion } from "framer-motion";
+import axios from "axios";
 
 const SignUp = () => {
-  const handleSignUp = (event) => {
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    password: "",
+    confirmPassword: "",
+  });
+  const [message, setMessage] = useState(""); // To display success or error message
+
+  const handleInputChange = (event) => {
+    const { name, value } = event.target;
+    setFormData({ ...formData, [name]: value });
+  };
+
+  const handleSignUp = async (event) => {
     event.preventDefault();
-    // Handle sign-up logic here
+
+    // Basic validation
+    if (!formData.name || !formData.email || !formData.password || !formData.confirmPassword) {
+      alert("All fields are required.");
+      return;
+    }
+
+    if (formData.password !== formData.confirmPassword) {
+      alert("Passwords do not match.");
+      return;
+    }
+
+    if (formData.password.length < 8) {
+      alert("Password must be at least 8 characters long.");
+      return;
+    }
+
+    try {
+      const response = await axios.post("http://127.0.0.1:8000/api/register", {
+        name: formData.name,
+        email: formData.email,
+        password: formData.password,
+        password_confirmation: formData.confirmPassword,
+      });
+
+      setMessage("User registered successfully! Welcome!");
+      console.log(response.data);
+    } catch (error) {
+      console.error("Error during sign-up:", error.response?.data || error.message);
+      setMessage(error.response?.data?.message || "Error during sign-up. Please try again.");
+    }
   };
 
   return (
@@ -24,6 +68,8 @@ const SignUp = () => {
             <input
               type="text"
               name="name"
+              value={formData.name}
+              onChange={handleInputChange}
               className="w-full px-4 py-2 mt-1 border rounded-md bg-white text-black focus:outline-none focus:ring focus:ring-indigo-300 dark:bg-gray-800 dark:text-white dark:placeholder-gray-400"
               placeholder="Enter your name"
               required
@@ -36,6 +82,8 @@ const SignUp = () => {
             <input
               type="email"
               name="email"
+              value={formData.email}
+              onChange={handleInputChange}
               className="w-full px-4 py-2 mt-1 border rounded-md bg-white text-black focus:outline-none focus:ring focus:ring-indigo-300 dark:bg-gray-800 dark:text-white dark:placeholder-gray-400"
               placeholder="Enter your email"
               required
@@ -48,6 +96,8 @@ const SignUp = () => {
             <input
               type="password"
               name="password"
+              value={formData.password}
+              onChange={handleInputChange}
               className="w-full px-4 py-2 mt-1 border rounded-md bg-white text-black focus:outline-none focus:ring focus:ring-indigo-300 dark:bg-gray-800 dark:text-white dark:placeholder-gray-400"
               placeholder="Enter your password"
               required
@@ -60,6 +110,8 @@ const SignUp = () => {
             <input
               type="password"
               name="confirmPassword"
+              value={formData.confirmPassword}
+              onChange={handleInputChange}
               className="w-full px-4 py-2 mt-1 border rounded-md bg-white text-black focus:outline-none focus:ring focus:ring-indigo-300 dark:bg-gray-800 dark:text-white dark:placeholder-gray-400"
               placeholder="Confirm your password"
               required
@@ -72,6 +124,7 @@ const SignUp = () => {
             Sign Up
           </button>
         </form>
+        {message && <p className="text-center text-sm text-gray-600 dark:text-gray-400">{message}</p>}
         <p className="text-sm text-center text-gray-600 dark:text-gray-400">
           Already have an account?{" "}
           <a href="/signin" className="text-indigo-600 hover:underline">

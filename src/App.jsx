@@ -16,10 +16,30 @@ import Footer from "./components/Footer/Footer";
 import SignIn from "./components/SignIn/SignIn";
 import SignUp from "./components/SignUp/SignUp";
 
+// Dashboard imports
+import AdminDashboard from "./components/Admin/AdminDashboard";
+import UserDashboard from "./components/User/UserDashboard";
+
+// New Component Import
+import AddVehicle from "./components/Admin/AddVehicle";
+import ViewVehicle from "./components/Admin/ViewVehicle";
+import VehicleDetails from "./components/Admin/VehicleDetails";
+import Buy from "./components/User/Buy";
+import EditVehicle from "./components/Admin/EditVehicle";
+
+// Layout Component
+const Layout = ({ theme, setTheme, children }) => {
+  return (
+    <>
+      <Navbar theme={theme} setTheme={setTheme} />
+      {children}
+    </>
+  );
+};
+
 const App = () => {
-  // Dark mode setup
   const [theme, setTheme] = useState(
-    localStorage.getItem("theme") ? localStorage.getItem("theme") : "light"
+    localStorage.getItem("theme") || "light"
   );
   const element = document.documentElement;
 
@@ -33,7 +53,6 @@ const App = () => {
     }
   }, [theme]);
 
-  // Initialize AOS for animations
   useEffect(() => {
     AOS.init({
       offset: 100,
@@ -47,12 +66,12 @@ const App = () => {
   return (
     <Router>
       <div className="bg-white dark:bg-black dark:text-white text-black overflow-x-hidden">
-        <Navbar theme={theme} setTheme={setTheme} />
         <Routes>
+          {/* Routes with Navbar */}
           <Route
             path="/"
             element={
-              <>
+              <Layout theme={theme} setTheme={setTheme}>
                 <Hero theme={theme} />
                 <About />
                 <Services />
@@ -61,11 +80,40 @@ const App = () => {
                 <AppStoreBanner />
                 <Contact />
                 <Footer />
-              </>
+              </Layout>
             }
           />
-          <Route path="/signin" element={<SignIn />} />
-          <Route path="/signup" element={<SignUp />} />
+          <Route
+            path="/signin"
+            element={
+              <Layout theme={theme} setTheme={setTheme}>
+                <SignIn />
+              </Layout>
+            }
+          />
+          <Route
+            path="/signup"
+            element={
+              <Layout theme={theme} setTheme={setTheme}>
+                <SignUp />
+              </Layout>
+            }
+          />
+  
+     
+          {/* Routes without Navbar */}
+          <Route path="/admin-dashboard" element={<AdminDashboard />} />
+          <Route path="/user-dashboard" element={<UserDashboard />} />
+          <Route path="/admin-dashboard/AddVehicle" element={<AddVehicle />} />
+          <Route path="/Admin/AddVehicle" element={<AddVehicle />} />
+          <Route path="/Admin/ViewVehicle" element={<ViewVehicle />} />
+          <Route path="/vehicle/:id" element={<VehicleDetails />} />
+          <Route path="/buy/:id" element={<Buy />} />
+          <Route path="/edit-vehicle/:id" element={<EditVehicle />} />
+
+
+
+
         </Routes>
       </div>
     </Router>
