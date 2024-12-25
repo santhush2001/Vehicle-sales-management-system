@@ -21,9 +21,11 @@ import AdminDashboard from "./components/Admin/AdminDashboard";
 import UserDashboard from "./components/User/UserDashboard";
 
 // New Component Import
-import MyCars from "./components/User/MyCars"; // Import the MyCars component
 import AddVehicle from "./components/Admin/AddVehicle";
 import ViewVehicle from "./components/Admin/ViewVehicle";
+import VehicleDetails from "./components/Admin/VehicleDetails";
+import Buy from "./components/User/Buy";
+import EditVehicle from "./components/Admin/EditVehicle";
 
 // Layout Component
 const Layout = ({ theme, setTheme, children }) => {
@@ -97,22 +99,18 @@ const App = () => {
               </Layout>
             }
           />
-          <Route
-            path="/User/MyCars"
-            element={
-              
-                <MyCars />
-              
-            }
-          />
-           
+  
+     
           {/* Routes without Navbar */}
           <Route path="/admin-dashboard" element={<AdminDashboard />} />
           <Route path="/user-dashboard" element={<UserDashboard />} />
-          <Route path="/user-dashboard/MyCars" element={<MyCars />} />
           <Route path="/admin-dashboard/AddVehicle" element={<AddVehicle />} />
           <Route path="/Admin/AddVehicle" element={<AddVehicle />} />
           <Route path="/Admin/ViewVehicle" element={<ViewVehicle />} />
+          <Route path="/vehicle/:id" element={<VehicleDetails />} />
+          <Route path="/buy/:id" element={<Buy />} />
+          <Route path="/edit-vehicle/:id" element={<EditVehicle />} />
+
 
 
 

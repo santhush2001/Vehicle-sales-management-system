@@ -6,6 +6,7 @@ import { HiMenuAlt3, HiMenuAlt1 } from "react-icons/hi"; // Icons for responsive
 const AddVehicle = () => {
   const [theme, setTheme] = useState(localStorage.getItem("adminTheme") || "dark");
   const [menuOpen, setMenuOpen] = useState(false); // State for responsive menu
+  const [dropdownOpen, setDropdownOpen] = useState(false); // State for dropdown menu
   const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
@@ -65,6 +66,10 @@ const AddVehicle = () => {
     setMenuOpen(!menuOpen);
   };
 
+  const toggleDropdown = () => {
+    setDropdownOpen(!dropdownOpen);
+  };
+
   const handleLogout = () => {
     localStorage.removeItem("auth_token");
     localStorage.removeItem("role");
@@ -97,14 +102,35 @@ const AddVehicle = () => {
           >
             Home
           </button>
-          <button
-            onClick={() => navigate("/Admin/AddVehicle")}
-            className={`${
-              theme === "dark" ? "text-white hover:text-gray-300" : "text-black hover:text-gray-700"
-            }`}
-          >
-            Manage Vehicle
-          </button>
+
+          {/* Manage Vehicle Dropdown */}
+          <div className="relative">
+            <button
+              onClick={toggleDropdown}
+              className={`${
+                theme === "dark" ? "text-white hover:text-gray-300" : "text-black hover:text-gray-700"
+              }`}
+            >
+              Manage Vehicle
+            </button>
+            {dropdownOpen && (
+              <div className="absolute top-8 left-0 bg-white border border-gray-300 rounded shadow-md z-10">
+                <button
+                  onClick={() => navigate("/Admin/AddVehicle")}
+                  className="block px-4 py-2 text-gray-700 hover:bg-gray-200"
+                >
+                  Add Vehicle
+                </button>
+                <button
+                  onClick={() => navigate("/Admin/ViewVehicle")}
+                  className="block px-4 py-2 text-gray-700 hover:bg-gray-200"
+                >
+                  View Vehicle
+                </button>
+              </div>
+            )}
+          </div>
+
           <button
             onClick={() => navigate("/manage-users")}
             className={`${
@@ -161,34 +187,19 @@ const AddVehicle = () => {
             theme === "dark" ? "bg-gray-700" : "bg-gray-100"
           } md:hidden`}
         >
-          <button
-            onClick={() => navigate("/admin-dashboard")}
-            className="py-2 text-lg"
-          >
+          <button onClick={() => navigate("/admin-dashboard")} className="py-2 text-lg">
             Home
           </button>
-          <button
-            onClick={() => navigate("/vehicle")}
-            className="py-2 text-lg"
-          >
+          <button onClick={() => navigate("/vehicle")} className="py-2 text-lg">
             Manage Vehicle
           </button>
-          <button
-            onClick={() => navigate("/manage-users")}
-            className="py-2 text-lg"
-          >
+          <button onClick={() => navigate("/manage-users")} className="py-2 text-lg">
             Manage Users
           </button>
-          <button
-            onClick={() => navigate("/reports")}
-            className="py-2 text-lg"
-          >
+          <button onClick={() => navigate("/reports")} className="py-2 text-lg">
             Reports
           </button>
-          <div
-            onClick={toggleTheme}
-            className="flex items-center gap-2 py-2 cursor-pointer"
-          >
+          <div onClick={toggleTheme} className="flex items-center gap-2 py-2 cursor-pointer">
             {theme === "dark" ? (
               <BiSolidSun className="text-2xl" title="Switch to Light Mode" />
             ) : (
