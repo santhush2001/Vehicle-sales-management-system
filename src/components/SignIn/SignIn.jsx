@@ -101,6 +101,12 @@ const SignIn = () => {
             Sign Up
           </a>
         </p>
+        <p className="text-sm text-center text-gray-600 dark:text-gray-400">
+          Forgot your password?{" "}
+          <a href="/forgot-password" className="text-indigo-600 hover:underline">
+            Reset it here
+          </a>
+        </p>
       </motion.div>
     </div>
   );

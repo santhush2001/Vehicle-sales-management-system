@@ -15,17 +15,20 @@ import Testimonial from "./components/Testimonial/Testimonial";
 import Footer from "./components/Footer/Footer";
 import SignIn from "./components/SignIn/SignIn";
 import SignUp from "./components/SignUp/SignUp";
+import ForgotPassword from "./components/ForgotPassword";
 
 // Dashboard imports
 import AdminDashboard from "./components/Admin/AdminDashboard";
-import UserDashboard from "./components/User/UserDashboard";
+import UserDashboard from "./components/User/UserDashboard"; 
 
 // New Component Import
+import ChatBot from "./components/ChatBot/ChatBot";
 import AddVehicle from "./components/Admin/AddVehicle";
 import ViewVehicle from "./components/Admin/ViewVehicle";
 import VehicleDetails from "./components/Admin/VehicleDetails";
 import Buy from "./components/User/Buy";
 import EditVehicle from "./components/Admin/EditVehicle";
+
 
 // Layout Component
 const Layout = ({ theme, setTheme, children }) => {
@@ -105,6 +108,7 @@ const App = () => {
           <Route path="/admin-dashboard" element={<AdminDashboard />} />
           <Route path="/user-dashboard" element={<UserDashboard />} />
           <Route path="/admin-dashboard/AddVehicle" element={<AddVehicle />} />
+          <Route path="/forgot-password" element={<ForgotPassword />} />
           <Route path="/Admin/AddVehicle" element={<AddVehicle />} />
           <Route path="/Admin/ViewVehicle" element={<ViewVehicle />} />
           <Route path="/vehicle/:id" element={<VehicleDetails />} />
@@ -115,6 +119,7 @@ const App = () => {
 
 
         </Routes>
+        <ChatBot />
       </div>
     </Router>
   );
