@@ -30,11 +30,10 @@ const Hero = ({ theme }) => {
               data-aos-delay="600"
               className="text-5xl lg:text-7xl font-semibold font-serif"
             >
-              Auto Hub
+             DriveLine
             </h1>
             <p data-aos="fade-up" data-aos-delay="1000">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Ratione
-              veritatis explicabo quibusdam quae reprehenderit ab{" "}
+            Find the best second-hand vehicles with Driveline. Buy or sell effortlessly on our secure platform!{" "}
             </p>
             <button
               data-aos="fade-up"

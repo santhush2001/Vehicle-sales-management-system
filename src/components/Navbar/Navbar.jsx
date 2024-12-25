@@ -7,28 +7,32 @@ export const Navlinks = [
   {
     id: 1,
     name: "HOME",
-    link: "/",
+    link: "/#",
   },
   {
     id: 2,
-    name: "CARS",
-    link: "/#cars",
+    name: "ABOUT",
+    link: "/#about",
   },
   {
     id: 3,
-    name: "ABOUT",
-    link: "/#about",
+    name: "SERVICES",
+    link: "/#services",
   },
   {
     id: 4,
     name: "CONTACT",
     link: "/#contact",
   },
-
   {
     id: 5,
-    name: "SIGN in",
-    link: "/signin", // Link to the Sign Up page
+    name: "SIGN IN",
+    link: "/signin",
+  },
+  {
+    id: 6,
+    name: "SIGN UP",
+    link: "/signup",
   },
 ];
 
@@ -40,13 +44,11 @@ const Navbar = ({ theme, setTheme }) => {
   };
 
   return (
-    <div
-      className="relative z-10 shadow-md w-full dark:bg-black dark:text-white duration-300"
-    >
+    <div className="relative z-10 shadow-md w-full dark:bg-black dark:text-white duration-300">
       <div className="container py-2 md:py-0">
         <div className="flex justify-between items-center">
           <div>
-            <span className="text-3xl font-bold font-serif">Auto Hub</span>
+            <span className="text-3xl font-bold font-serif">DriveLine</span>
           </div>
           <nav className="hidden md:block">
             <ul className="flex items-center gap-8">
@@ -60,7 +62,6 @@ const Navbar = ({ theme, setTheme }) => {
                   </a>
                 </li>
               ))}
-              {/* DarkMode feature */}
               {theme === "dark" ? (
                 <BiSolidSun
                   onClick={() => setTheme("light")}
@@ -74,9 +75,7 @@ const Navbar = ({ theme, setTheme }) => {
               )}
             </ul>
           </nav>
-          {/* Mobile view */}
           <div className="flex items-center gap-4 md:hidden">
-            {/* Dark mode */}
             {theme === "dark" ? (
               <BiSolidSun
                 onClick={() => setTheme("light")}
@@ -88,7 +87,6 @@ const Navbar = ({ theme, setTheme }) => {
                 className="text-2xl"
               />
             )}
-            {/* Mobile Hamburger icon */}
             {showMenu ? (
               <HiMenuAlt1
                 onClick={toggleMenu}
