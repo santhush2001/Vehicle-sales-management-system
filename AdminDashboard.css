@@ -1,0 +1,132 @@
+/* General Styles */
+body {
+  margin: 0;
+  font-family: 'Roboto', sans-serif;
+}
+
+.dashboard-layout {
+  display: flex;
+  flex-direction: column;
+}
+
+nav {
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Logo Styles */
+nav h1 {
+  color: #4caf50; /* Primary color */
+}
+
+nav h1 .text-secondary {
+  color: #ff5722; /* Secondary color */
+}
+
+/* Navigation Button Styles */
+nav button {
+  font-size: 1rem;
+  transition: color 0.3s ease, background-color 0.3s ease;
+}
+
+/* Dropdown Styles */
+nav .relative .absolute {
+  background-color: #ffffff;
+  border-radius: 8px;
+  padding: 0.5rem 0;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+nav .relative .absolute button {
+  font-size: 0.9rem;
+  padding: 0.5rem 0.5rem;
+  color: #444;
+  text-align: left;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+nav .relative .absolute button:hover {
+  background-color: #ffd700; /* Golden accent */
+  color: #000; /* Black text on hover */
+  font-weight: bold;
+  cursor: pointer;
+}
+
+/* Theme Switcher */
+nav .text-2xl {
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+nav .text-2xl:hover {
+  transform: scale(1.2);
+}
+
+/* Mobile Menu Styles */
+.md\:hidden {
+  transition: height 0.3s ease;
+}
+
+.md\:hidden button {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  margin-bottom: 0.5rem;
+}
+
+.md\:hidden button:last-child {
+  border: none;
+}
+
+/* Main Content Styles */
+main {
+  background: linear-gradient(120deg, #f0f4f8, #d9e6f1);
+  border-radius: 8px;
+  margin: 20px auto;
+  padding: 20px;
+  width: 90%;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+main h2 {
+  color: #333;
+  text-align: center;
+}
+
+/* Card Styles for Counts */
+main .grid div {
+  text-align: center;
+  padding: 20px;
+  border-radius: 8px;
+  background: linear-gradient(120deg, #6a11cb, #2575fc); /* Blue and Purple Gradient */
+  color: white;
+  font-size: 1.2rem;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+main .grid div:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+}
+
+main .grid div h3 {
+  margin-bottom: 10px;
+  font-weight: 600;
+}
+
+main .grid div p {
+  font-size: 2.5rem;
+  font-weight: bold;
+}
+
+/* Responsive Styles */
+@media screen and (max-width: 768px) {
+  main .grid {
+    grid-template-columns: 1fr;
+  }
+
+  nav h1 {
+    font-size: 1.5rem;
+  }
+
+  nav button {
+    font-size: 0.9rem;
+  }
+}
