@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "./ChatBot.css";
 import axios from "axios";
+import "@fortawesome/fontawesome-free/css/all.min.css";
 
 const ChatBot = () => {
     const [isVisible, setIsVisible] = useState(false);

@@ -87,7 +87,7 @@ const VehicleDetails = () => {
                 <strong>Year:</strong> {vehicle.year}
               </p>
               <p className="text-gray-900 dark:text-gray-300">
-                <strong>Price:</strong> ${vehicle.price}
+                <strong>Price:</strong> Lkr.{vehicle.price}
               </p>
               <p className="text-gray-900 dark:text-gray-300">
                 <strong>Mileage:</strong> {vehicle.mileage} miles

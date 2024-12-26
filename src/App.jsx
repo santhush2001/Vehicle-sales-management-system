@@ -28,6 +28,7 @@ import ViewVehicle from "./components/Admin/ViewVehicle";
 import VehicleDetails from "./components/Admin/VehicleDetails";
 import Buy from "./components/User/Buy";
 import EditVehicle from "./components/Admin/EditVehicle";
+import ComparisonList from "./components/User/ComparisonList";
 
 
 // Layout Component
@@ -114,7 +115,7 @@ const App = () => {
           <Route path="/vehicle/:id" element={<VehicleDetails />} />
           <Route path="/buy/:id" element={<Buy />} />
           <Route path="/edit-vehicle/:id" element={<EditVehicle />} />
-
+          <Route path="/comparison" element={<ComparisonList />} />
 
 
 

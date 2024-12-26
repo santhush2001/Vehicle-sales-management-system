@@ -221,7 +221,7 @@ const ViewVehicle = () => {
                 <strong>Year:</strong> {vehicle.year}
               </p>
               <p>
-                <strong>Price:</strong> ${vehicle.price}
+                <strong>Price:</strong> Lkr.{vehicle.price}
               </p>
               <p>
                 <strong>Mileage:</strong> {vehicle.mileage} miles
