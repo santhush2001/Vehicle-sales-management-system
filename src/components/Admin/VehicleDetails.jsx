@@ -5,8 +5,10 @@ import { BiSolidSun, BiSolidMoon } from "react-icons/bi"; // Icons for theme tog
 const VehicleDetails = () => {
   const { id } = useParams(); // Get the vehicle ID from the route
   const [vehicle, setVehicle] = useState(null);
+  const [media, setMedia] = useState([]);
   const [loading, setLoading] = useState(true);
   const [theme, setTheme] = useState(localStorage.getItem("adminTheme") || "dark");
+  const [viewMedia, setViewMedia] = useState(false); // State to control media visibility
   const navigate = useNavigate();
 
   // Update the theme in localStorage and apply the class
@@ -35,6 +37,48 @@ const VehicleDetails = () => {
 
     fetchVehicleDetails();
   }, [id]);
+
+  // Handle media file upload
+  const handleMediaChange = (e) => {
+    setMedia([...media, ...e.target.files]);
+  };
+
+  const handleMediaUpload = async () => {
+    const formData = new FormData();
+    media.forEach((file) => {
+      formData.append("media[]", file);
+    });
+
+    try {
+      const response = await fetch(`http://127.0.0.1:8000/api/vehicles/${id}/media`, {
+        method: "POST",
+        headers: {
+          "Accept": "application/json",
+        },
+        body: formData,
+      });
+      if (response.ok) {
+        alert("Media uploaded successfully!");
+        const data = await response.json();
+        setVehicle((prevVehicle) => ({
+          ...prevVehicle,
+          media: [...prevVehicle.media, ...data.media],
+        }));
+
+        // Redirect to vehicle details page after successful upload
+        navigate(`/Vehicle-details/${id}`);
+      } else {
+        alert("Failed to upload media");
+      }
+    } catch (error) {
+      console.error("Error uploading media:", error);
+      alert("An error occurred while uploading media");
+    }
+  };
+
+  const toggleMediaVisibility = () => {
+    setViewMedia(!viewMedia);
+  };
 
   if (loading) {
     return <div>Loading...</div>;
@@ -70,7 +114,7 @@ const VehicleDetails = () => {
 
       <main className="p-6">
         <button
-          onClick={() => navigate(-1)}
+          onClick={() => navigate("/Admin/ViewVehicle")}
           className="text-blue-500 hover:text-blue-700 mb-4 inline-block"
         >
           &larr; Back
@@ -120,6 +164,51 @@ const VehicleDetails = () => {
                     alt={`${vehicle.make} ${vehicle.model}`}
                     className="w-full h-64 object-contain rounded-lg shadow-md"
                   />
+                </div>
+              )}
+
+              {/* Media Upload Section */}
+              <div className="mt-6">
+                <input
+                  type="file"
+                  multiple
+                  onChange={handleMediaChange}
+                  className="border p-2 rounded"
+                />
+                <button
+                  onClick={handleMediaUpload}
+                  className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 mt-2"
+                >
+                  Upload Media
+                </button>
+              </div>
+
+              {/* View Media Button */}
+              {vehicle.media && vehicle.media.length > 0 && (
+                <button
+                  onClick={toggleMediaVisibility}
+                  className="mt-4 px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600"
+                >
+                  {viewMedia ? "Hide Media" : "View Media"}
+                </button>
+              )}
+
+              {/* Display uploaded media if visible */}
+              {viewMedia && vehicle.media && (
+                <div className="mt-6 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
+                  {vehicle.media.map((mediaItem) => (
+                    <div
+                      key={mediaItem.id}
+                      className="cursor-pointer group relative overflow-hidden rounded-lg"
+                      onClick={() => navigate("/media-viewer", { state: { mediaItem, mediaList: vehicle.media, vehicleId: vehicle.id } })}
+                    >
+                      <img
+                        src={`http://127.0.0.1:8000/storage/${mediaItem.file_path}`}
+                        alt={`Media for ${vehicle.make} ${vehicle.model}`}
+                        className="w-full h-40 object-cover transform transition duration-300 group-hover:scale-105"
+                      />
+                    </div>
+                  ))}
                 </div>
               )}
             </div>

@@ -105,12 +105,23 @@ const Buy = () => {
               Buy
             </button>
 
-            <button
-              onClick={() => navigate(`/viewvehicle/${vehicle.id}`)}
-              className="px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600"
-            >
-              View
-            </button>
+           
+            {vehicle.media && vehicle.media.length > 0 && (
+              <button
+                onClick={() =>
+                  navigate("/user-media-viewer", {
+                    state: {
+                      mediaItem: vehicle.media[0],
+                      mediaList: vehicle.media,
+                      vehicleId: vehicle.id,
+                    },
+                  })
+                }
+                className="px-4 py-2 bg-purple-500 text-white rounded hover:bg-purple-600"
+              >
+                View Media
+              </button>
+            )}
           </div>
         </div>
       </main>
