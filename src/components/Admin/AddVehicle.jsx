@@ -228,7 +228,7 @@ const AddVehicle = () => {
               placeholder="Make"
               value={formData.make}
               onChange={handleChange}
-              className="p-2 border rounded"
+              className={`p-2 border rounded ${theme === "dark" ? "bg-gray-800 text-white" : "bg-white text-black"}`}
             />
             <input
               type="text"
@@ -236,7 +236,7 @@ const AddVehicle = () => {
               placeholder="Model"
               value={formData.model}
               onChange={handleChange}
-              className="p-2 border rounded"
+              className={`p-2 border rounded ${theme === "dark" ? "bg-gray-800 text-white" : "bg-white text-black"}`}
             />
             <input
               type="number"
@@ -244,7 +244,7 @@ const AddVehicle = () => {
               placeholder="Year"
               value={formData.year}
               onChange={handleChange}
-              className="p-2 border rounded"
+              className={`p-2 border rounded ${theme === "dark" ? "bg-gray-800 text-white" : "bg-white text-black"}`}
             />
             <input
               type="number"
@@ -252,7 +252,7 @@ const AddVehicle = () => {
               placeholder="Price"
               value={formData.price}
               onChange={handleChange}
-              className="p-2 border rounded"
+              className={`p-2 border rounded ${theme === "dark" ? "bg-gray-800 text-white" : "bg-white text-black"}`}
             />
             <input
               type="number"
@@ -260,13 +260,13 @@ const AddVehicle = () => {
               placeholder="Mileage"
               value={formData.mileage}
               onChange={handleChange}
-              className="p-2 border rounded"
+              className={`p-2 border rounded ${theme === "dark" ? "bg-gray-800 text-white" : "bg-white text-black"}`}
             />
             <select
               name="condition"
               value={formData.condition}
               onChange={handleChange}
-              className="p-2 border rounded"
+              className={`p-2 border rounded ${theme === "dark" ? "bg-gray-800 text-white" : "bg-white text-black"}`}
             >
               <option value="">Condition</option>
               <option value="New">New</option>
@@ -278,23 +278,25 @@ const AddVehicle = () => {
               placeholder="Engine Type"
               value={formData.engine_type}
               onChange={handleChange}
-              className="p-2 border rounded"
+              className={`p-2 border rounded ${theme === "dark" ? "bg-gray-800 text-white" : "bg-white text-black"}`}
             />
-            <input
-              type="text"
+            <select
               name="transmission"
-              placeholder="Transmission"
               value={formData.transmission}
               onChange={handleChange}
-              className="p-2 border rounded"
-            />
+              className={`p-2 border rounded ${theme === "dark" ? "bg-gray-800 text-white" : "bg-white text-black"}`}
+            >
+              <option value="">Transmission</option>
+              <option value="Manual">Manual</option>
+              <option value="Automatic">Automatic</option>
+            </select>
             <input
               type="text"
               name="fuel_type"
               placeholder="Fuel Type"
               value={formData.fuel_type}
               onChange={handleChange}
-              className="p-2 border rounded"
+              className={`p-2 border rounded ${theme === "dark" ? "bg-gray-800 text-white" : "bg-white text-black"}`}
             />
             <input
               type="number"
@@ -302,20 +304,20 @@ const AddVehicle = () => {
               placeholder="Seating Capacity"
               value={formData.seating_capacity}
               onChange={handleChange}
-              className="p-2 border rounded"
+              className={`p-2 border rounded ${theme === "dark" ? "bg-gray-800 text-white" : "bg-white text-black"}`}
             />
             <textarea
               name="description"
               placeholder="Description"
               value={formData.description}
               onChange={handleChange}
-              className="p-2 border rounded col-span-2"
+              className={`p-2 border rounded col-span-2 ${theme === "dark" ? "bg-gray-800 text-white" : "bg-white text-black"}`}
             />
             <input
               type="file"
               name="image"
               onChange={handleFileChange}
-              className="p-2 border rounded"
+              className={`p-2 border rounded ${theme === "dark" ? "bg-gray-800 text-white" : "bg-white text-black"}`}
             />
           </div>
           <button

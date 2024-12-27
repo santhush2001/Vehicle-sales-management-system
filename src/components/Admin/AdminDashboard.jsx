@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { BiSolidSun, BiSolidMoon } from "react-icons/bi";
 import { HiMenuAlt3, HiMenuAlt1 } from "react-icons/hi"; // Icons for responsive menu
+import { FaCar, FaUsers, FaChartLine, FaExclamationCircle } from "react-icons/fa"; // For dashboard icons
 
 const AdminDashboard = () => {
   const [theme, setTheme] = useState(localStorage.getItem("adminTheme") || "dark");
@@ -173,6 +174,64 @@ const AdminDashboard = () => {
       {/* Main Content */}
       <main className="p-6">
         <h2 className="text-2xl font-semibold">Welcome to the Admin Dashboard</h2>
+
+        {/* Dashboard Overview */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-6">
+          {/* Total Vehicles */}
+          <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md">
+            <div className="flex items-center gap-4">
+              <FaCar className="text-4xl text-blue-500" />
+              <div>
+                <h3 className="text-xl font-semibold">Total Vehicles</h3>
+                <p className="text-gray-700 dark:text-gray-300">120</p>
+              </div>
+            </div>
+          </div>
+
+          {/* Total Users */}
+          <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md">
+            <div className="flex items-center gap-4">
+              <FaUsers className="text-4xl text-green-500" />
+              <div>
+                <h3 className="text-xl font-semibold">Total Users</h3>
+                <p className="text-gray-700 dark:text-gray-300">500</p>
+              </div>
+            </div>
+          </div>
+
+          {/* Reports */}
+          <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md">
+            <div className="flex items-center gap-4">
+              <FaChartLine className="text-4xl text-yellow-500" />
+              <div>
+                <h3 className="text-xl font-semibold">Reports</h3>
+                <p className="text-gray-700 dark:text-gray-300">View your reports</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Alerts */}
+        <div className="mt-6">
+          <div className="bg-red-100 p-4 rounded-lg flex items-center gap-4">
+            <FaExclamationCircle className="text-3xl text-red-500" />
+            <div>
+              <p className="text-lg font-semibold">System Alert</p>
+              <p className="text-gray-700">There are pending vehicle updates that need your attention.</p>
+            </div>
+          </div>
+        </div>
+     {/* Recent Activity Section */}
+     <div className="mt-8">
+          <h3 className="text-xl font-semibold">Recent Activity</h3>
+          <ul className="list-disc pl-5 mt-4 text-gray-900 dark:text-gray-100">
+            <li>Vehicle ID 12345 added successfully.</li>
+            <li>User John Doe updated their profile.</li>
+            <li>Vehicle ID 67890 price updated.</li>
+            <li>New user registration: Alice Smith.</li>
+            <li>Vehicle ID 45678 deleted.</li>
+          </ul>
+        </div>
       </main>
     </div>
   );

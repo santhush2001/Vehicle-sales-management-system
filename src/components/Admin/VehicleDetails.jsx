@@ -80,6 +80,29 @@ const VehicleDetails = () => {
     setViewMedia(!viewMedia);
   };
 
+  // Handle vehicle deletion
+  const handleDelete = async () => {
+    const confirmDelete = window.confirm("Are you sure you want to delete this vehicle?");
+
+    if (confirmDelete) {
+      try {
+        const response = await fetch(`http://127.0.0.1:8000/api/vehicles/${id}`, {
+          method: "DELETE",
+        });
+
+        if (response.ok) {
+          alert("Vehicle deleted successfully");
+          navigate("/Admin/ViewVehicle"); // Redirect to the vehicle list after deletion
+        } else {
+          alert("Failed to delete vehicle");
+        }
+      } catch (error) {
+        console.error("Error deleting vehicle:", error);
+        alert("An error occurred while deleting the vehicle");
+      }
+    }
+  };
+
   if (loading) {
     return <div>Loading...</div>;
   }
@@ -221,6 +244,13 @@ const VehicleDetails = () => {
               className="px-4 py-2 bg-yellow-500 text-white rounded hover:bg-yellow-600"
             >
               Edit
+            </button>
+            {/* Delete Button */}
+            <button
+              onClick={handleDelete} // Trigger delete action
+              className="px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700"
+            >
+              Delete
             </button>
           </div>
         </div>
