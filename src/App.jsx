@@ -17,6 +17,7 @@ import SignIn from "./components/SignIn/SignIn";
 import SignUp from "./components/SignUp/SignUp";
 import ForgotPassword from "./components/ForgotPassword";
 import ProfilePage from "./components/User/ProfilePage";
+import ManageUsers from "./components/Admin/ManageUsers";
 
 // Dashboard imports
 import AdminDashboard from "./components/Admin/AdminDashboard";
@@ -122,6 +123,7 @@ const App = () => {
           <Route path="/media-viewer" element={<MediaViewer />} />
           <Route path="/user-media-viewer" element={<MediaViewerUser />} />
           <Route path="/profile" element={<ProfilePage />} />
+          <Route path="/Admin/ManageUsers" element={<ManageUsers />} />
 
         </Routes>
         <ChatBot />

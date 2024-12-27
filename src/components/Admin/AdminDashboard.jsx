@@ -77,7 +77,7 @@ const AdminDashboard = () => {
           </div>
 
           <button
-            onClick={() => navigate("/manage-users")}
+            onClick={() => navigate("/Admin/ManageUsers")}
             className={`${theme === "dark" ? "text-white hover:text-gray-300" : "text-black hover:text-gray-700"}`}
           >
             Manage Users
@@ -139,7 +139,7 @@ const AdminDashboard = () => {
             Manage Vehicle
           </button>
           <button
-            onClick={() => navigate("/manage-users")}
+            onClick={() => navigate("/Admin/ManageUsers")}
             className="py-2 text-lg"
           >
             Manage Users
