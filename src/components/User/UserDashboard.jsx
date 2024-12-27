@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { BiSolidSun, BiSolidMoon } from "react-icons/bi";
 import { HiMenuAlt3, HiMenuAlt1 } from "react-icons/hi";
+import { faUser } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const UserDashboard = () => {
   const [theme, setTheme] = useState(localStorage.getItem("userTheme") || "light");
@@ -33,6 +35,8 @@ const UserDashboard = () => {
 
     fetchVehicles();
   }, []);
+
+  
 
   const toggleTheme = () => {
     const newTheme = theme === "dark" ? "light" : "dark";
@@ -100,58 +104,62 @@ const UserDashboard = () => {
         theme === "dark" ? "bg-gray-900 text-white" : "bg-white text-gray-900"
       } min-h-screen`}
     >
-      <header
-        className={`p-4 ${
-          theme === "dark" ? "bg-gray-800" : "bg-gray-200"
-        } flex justify-between items-center`}
+   <header
+  className={`p-4 ${
+    theme === "dark" ? "bg-gray-800" : "bg-gray-200"
+  } flex justify-between items-center`}
+>
+  <h1 className="text-3xl font-extrabold text-primary tracking-tight">
+    Drive <span className="text-secondary">Line</span>
+  </h1>
+
+  <div className="flex items-center gap-4">
+    <FontAwesomeIcon
+      icon={faUser}
+      className="text-2xl cursor-pointer"
+      title="Profile"
+    />
+    <div className="md:hidden">
+      {menuOpen ? (
+        <HiMenuAlt1
+          onClick={toggleMenu}
+          className="text-3xl cursor-pointer"
+        />
+      ) : (
+        <HiMenuAlt3
+          onClick={toggleMenu}
+          className="text-3xl cursor-pointer"
+        />
+      )}
+    </div>
+
+    <div className="hidden md:flex items-center gap-4">
+      {theme === "dark" ? (
+        <BiSolidSun
+          onClick={toggleTheme}
+          className="text-2xl cursor-pointer"
+          title="Switch to Light Mode"
+        />
+      ) : (
+        <BiSolidMoon
+          onClick={toggleTheme}
+          className="text-2xl cursor-pointer"
+          title="Switch to Dark Mode"
+        />
+      )}
+      <button
+        onClick={handleLogout}
+        className={`px-4 py-2 rounded ${
+          theme === "dark"
+            ? "bg-red-600 hover:bg-red-500 text-white"
+            : "bg-red-400 hover:bg-red-300 text-black"
+        }`}
       >
-        <h1 className="text-3xl font-extrabold text-primary tracking-tight">
-          Auto <span className="text-secondary">Hub</span>
-        </h1>
-
-        <div className="flex items-center gap-4">
-          <div className="md:hidden">
-            {menuOpen ? (
-              <HiMenuAlt1
-                onClick={toggleMenu}
-                className="text-3xl cursor-pointer"
-              />
-            ) : (
-              <HiMenuAlt3
-                onClick={toggleMenu}
-                className="text-3xl cursor-pointer"
-              />
-            )}
-          </div>
-
-          <div className="hidden md:flex items-center gap-4">
-            {theme === "dark" ? (
-              <BiSolidSun
-                onClick={toggleTheme}
-                className="text-2xl cursor-pointer"
-                title="Switch to Light Mode"
-              />
-            ) : (
-              <BiSolidMoon
-                onClick={toggleTheme}
-                className="text-2xl cursor-pointer"
-                title="Switch to Dark Mode"
-              />
-            )}
-            <button
-              onClick={handleLogout}
-              className={`px-4 py-2 rounded ${
-                theme === "dark"
-                  ? "bg-red-600 hover:bg-red-500 text-white"
-                  : "bg-red-400 hover:bg-red-300 text-black"
-              }`}
-            >
-              Logout
-            </button>
-          </div>
-        </div>
-      </header>
-
+        Logout
+      </button>
+    </div>
+  </div>
+</header>
       {menuOpen && (
         <div
           className={`p-4 ${
@@ -302,6 +310,8 @@ const UserDashboard = () => {
           </div>
         </div>
 
+
+
         {/* Display filtered vehicles */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {filteredVehicles.map((vehicle) => (
@@ -346,7 +356,7 @@ const UserDashboard = () => {
         </div>
 
         {/* Compare Button */}
-        <div className="mt-4 flex justify-end">
+        <div className="mt-4 flex justify-center items-center">
           {comparisonList.length > 0 && (
             <button
               onClick={handleCompareClick}

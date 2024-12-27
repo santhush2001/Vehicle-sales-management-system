@@ -75,20 +75,7 @@ const ComparisonList = () => {
                 </div>
               </div>
 
-              <div className="mt-6 flex gap-4">
-                <button
-                  onClick={() => navigate(`/buy/${vehicle.id}`)}
-                  className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
-                >
-                  Buy
-                </button>
-                <button
-                  onClick={() => navigate(`/viewvehicle/${vehicle.id}`)}
-                  className="px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600"
-                >
-                  View
-                </button>
-              </div>
+             
             </div>
           ))}
         </div>
