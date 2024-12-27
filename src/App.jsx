@@ -16,6 +16,7 @@ import Footer from "./components/Footer/Footer";
 import SignIn from "./components/SignIn/SignIn";
 import SignUp from "./components/SignUp/SignUp";
 import ForgotPassword from "./components/ForgotPassword";
+import ProfilePage from "./components/User/ProfilePage";
 
 // Dashboard imports
 import AdminDashboard from "./components/Admin/AdminDashboard";
@@ -120,7 +121,7 @@ const App = () => {
           <Route path="/comparison" element={<ComparisonList />} />
           <Route path="/media-viewer" element={<MediaViewer />} />
           <Route path="/user-media-viewer" element={<MediaViewerUser />} />
-
+          <Route path="/profile" element={<ProfilePage />} />
 
         </Routes>
         <ChatBot />

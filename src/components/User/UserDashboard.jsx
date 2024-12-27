@@ -15,6 +15,7 @@ const UserDashboard = () => {
   const [mileageRange, setMileageRange] = useState({ min: 0, max: Infinity });
   const [condition, setCondition] = useState("All");
   const [comparisonList, setComparisonList] = useState([]); // Store selected vehicles for comparison
+  const [user, setUser] = useState(null);  // Store the user data
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -36,7 +37,35 @@ const UserDashboard = () => {
     fetchVehicles();
   }, []);
 
-  
+   // Fetch user data from the backend API
+   useEffect(() => {
+    const fetchUserData = async () => {
+      try {
+        const token = localStorage.getItem("auth_token");
+        const response = await fetch("http://127.0.0.1:8000/api/user", {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+
+        if (response.ok) {
+          const data = await response.json();
+          setUser(data); // Set the user data
+        } else {
+          alert("Failed to fetch user profile");
+        }
+      } catch (error) {
+        console.error("Error fetching user data:", error);
+      }
+    };
+
+    fetchUserData();
+  }, []);
+
+  const handleProfileClick = () => {
+    navigate("/profile");  // Navigate to the profile page
+  };
+
 
   const toggleTheme = () => {
     const newTheme = theme === "dark" ? "light" : "dark";
@@ -114,24 +143,20 @@ const UserDashboard = () => {
   </h1>
 
   <div className="flex items-center gap-4">
-    <FontAwesomeIcon
-      icon={faUser}
-      className="text-2xl cursor-pointer"
-      title="Profile"
-    />
-    <div className="md:hidden">
-      {menuOpen ? (
-        <HiMenuAlt1
-          onClick={toggleMenu}
-          className="text-3xl cursor-pointer"
-        />
-      ) : (
-        <HiMenuAlt3
-          onClick={toggleMenu}
-          className="text-3xl cursor-pointer"
-        />
-      )}
-    </div>
+          <FontAwesomeIcon
+            icon={faUser}
+            className="text-2xl cursor-pointer"
+            onClick={handleProfileClick}  // Handle profile click
+            title="Profile"
+          />
+          {/* Menu and Theme Toggle */}
+          <div className="md:hidden">
+            {menuOpen ? (
+              <HiMenuAlt1 onClick={toggleMenu} className="text-3xl cursor-pointer" />
+            ) : (
+              <HiMenuAlt3 onClick={toggleMenu} className="text-3xl cursor-pointer" />
+            )}
+          </div>
 
     <div className="hidden md:flex items-center gap-4">
       {theme === "dark" ? (
