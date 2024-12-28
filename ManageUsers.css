@@ -1,0 +1,49 @@
+/* Beautiful border styling for the table */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    border-radius: 8px;
+}
+
+thead {
+    background-color: var(--header-bg, #f5f5f5);
+}
+
+th {
+    background-color: var(--header-bg, #f5f5f5);
+    color: var(--header-text, #333);
+    font-weight: bold;
+    padding: 0.75rem;
+    text-align: left;
+    border-bottom: 2px solid var(--border-color, #ccc);
+}
+
+tbody tr {
+    background-color: var(--row-bg, #fff);
+    border-bottom: 1px solid var(--border-color, #ddd);
+}
+
+tbody tr:hover {
+    background-color: var(--row-hover-bg, #e6e6e6);
+}
+
+button {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    color: inherit;
+}
+
+button:hover {
+    color: var(--hover-color, #f44336);
+}
+
+table th,
+table td {
+    padding: 12px 16px;
+    text-align: left;
+}
+
+table tbody tr:last-child td {
+    border-bottom: none;
+}
