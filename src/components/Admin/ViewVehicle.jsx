@@ -94,7 +94,7 @@ const ViewVehicle = () => {
             Manage Vehicle
           </button>
           <button
-            onClick={() => navigate("/manage-users")}
+            onClick={() => navigate("/Admin/ManageUsers")}
             className={`${
               theme === "dark" ? "text-white hover:text-gray-300" : "text-black hover:text-gray-700"
             }`}

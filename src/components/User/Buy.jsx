@@ -14,6 +14,7 @@ const Buy = () => {
   const [modalOpen, setModalOpen] = useState(false); // Modal state
   const [testDriveDate, setTestDriveDate] = useState("");
   const [testDriveTime, setTestDriveTime] = useState("");
+  const [note, setNote] = useState(""); // New note state
   const navigate = useNavigate();
 
   // Toggle theme (light/dark)
@@ -60,6 +61,8 @@ const Buy = () => {
             vehicle_id: vehicle.id,
             test_drive_date: testDriveDate,
             test_drive_time: testDriveTime,
+            note: note, // Include the note in the request
+            status: "pending", // Default status
           }),
         });
 
@@ -168,8 +171,8 @@ const Buy = () => {
         </div>
       </main>
 
-      {/* Test Drive Modal */}
-      <Modal
+     {/* Test Drive Modal */}
+     <Modal
         isOpen={modalOpen}
         onRequestClose={closeModal}
         contentLabel="Schedule Test Drive"
@@ -186,13 +189,22 @@ const Buy = () => {
             onChange={(e) => setTestDriveDate(e.target.value)}
           />
         </label>
-        <label className="block mb-4 text-gray-700 dark:text-gray-300">
+        <label className="block mb-2 text-gray-700 dark:text-gray-300">
           Select Time:
           <input
             type="time"
             className="block w-full mt-1 p-2 border rounded dark:bg-gray-700 dark:border-gray-600 dark:text-white"
             value={testDriveTime}
             onChange={(e) => setTestDriveTime(e.target.value)}
+          />
+        </label>
+        <label className="block mb-4 text-gray-700 dark:text-gray-300">
+          Add Notes:
+          <textarea
+            className="block w-full mt-1 p-2 border rounded dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+            value={note}
+            onChange={(e) => setNote(e.target.value)}
+            placeholder="Add contact details or special notes"
           />
         </label>
         <div className="flex justify-end gap-4">
