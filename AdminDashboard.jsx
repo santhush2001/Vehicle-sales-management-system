@@ -105,13 +105,13 @@ const AdminDashboard = () => {
             Manage Users
           </button>
           <button
-            onClick={() => navigate("/reports")}
+            onClick={() => navigate("/Admin/Appointments")}
             className={`py-2 px-4 text-lg rounded-full transition-all duration-300 ${theme === "dark"
               ? "text-white bg-blue-600 hover:bg-blue-500"
               : "text-black bg-blue-400 hover:bg-blue-300"
               }`}
           >
-            Reports
+            Appointments
           </button>
           {theme === "dark" ? (
             <BiSolidSun
@@ -153,8 +153,8 @@ const AdminDashboard = () => {
           <button onClick={() => navigate("/Admin/ManageUsers")} className="py-2 text-lg">
             Manage Users
           </button>
-          <button onClick={() => navigate("/reports")} className="py-2 text-lg">
-            Reports
+          <button onClick={() => navigate("/Admin/Appointments")} className="py-2 text-lg">
+            Appointments
           </button>
           <div onClick={toggleTheme} className="flex items-center gap-2 py-2 cursor-pointer">
             {theme === "dark" ? (

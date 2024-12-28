@@ -183,13 +183,13 @@ const VehicleDetails = () => {
             Manage Users
           </button>
           <button
-            onClick={() => navigate("/reports")}
+            onClick={() => navigate("/Admin/Appointments")}
             className={`py-2 px-4 text-lg rounded-full transition-all duration-300 ${theme === "dark"
               ? "text-white bg-blue-600 hover:bg-blue-500"
               : "text-black bg-blue-400 hover:bg-blue-300"
               }`}
           >
-            Reports
+            Appointments
           </button>
           {theme === "dark" ? (
             <BiSolidSun

@@ -80,7 +80,7 @@ const ViewVehicle = () => {
             )}
           </div>
           <button onClick={() => navigate("/Admin/ManageUsers")} className={`py-2 px-4 text-lg rounded-full transition-all duration-300 ${theme === "dark" ? "text-white bg-blue-600 hover:bg-blue-500" : "text-black bg-blue-400 hover:bg-blue-300"}`}>Manage Users</button>
-          <button onClick={() => navigate("/reports")} className={`py-2 px-4 text-lg rounded-full transition-all duration-300 ${theme === "dark" ? "text-white bg-blue-600 hover:bg-blue-500" : "text-black bg-blue-400 hover:bg-blue-300"}`}>Reports</button>
+          <button onClick={() => navigate("/Admin/Appointments")} className={`py-2 px-4 text-lg rounded-full transition-all duration-300 ${theme === "dark" ? "text-white bg-blue-600 hover:bg-blue-500" : "text-black bg-blue-400 hover:bg-blue-300"}`}>Appointments</button>
           {theme === "dark" ? (
             <BiSolidSun onClick={toggleTheme} className="text-2xl cursor-pointer transition-all duration-300 hover:text-gray-300" title="Switch to Light Mode" />
           ) : (
