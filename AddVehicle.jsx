@@ -48,6 +48,7 @@ const AddVehicle = () => {
       });
       if (response.ok) {
         alert("Vehicle added successfully");
+        navigate("/Admin/ViewVehicle");
       } else {
         alert("Failed to add vehicle");
       }
