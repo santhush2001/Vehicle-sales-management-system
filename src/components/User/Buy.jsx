@@ -42,7 +42,30 @@ const Buy = () => {
       }
     };
 
+    const fetchUserProfile = async () => {
+      try {
+        const token = localStorage.getItem('auth_token');
+        const response = await fetch('http://127.0.0.1:8000/api/user', {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+    
+        if (response.ok) {
+          const data = await response.json();
+          // Save the user ID to localStorage for use in other components
+          localStorage.setItem('user_id', data.id);
+        } else {
+          alert('Failed to fetch user data');
+        }
+      } catch (error) {
+        console.error('Error fetching user data:', error);
+        alert('An error occurred while fetching user data');
+      }
+    };
+
     fetchVehicleDetails();
+    fetchUserProfile();
   }, [id]);
 
   const openModal = () => setModalOpen(true);
@@ -57,7 +80,7 @@ const Buy = () => {
             "Content-Type": "application/json",
           },
           body: JSON.stringify({
-            user_id: 1, // Replace with the logged-in user's ID
+            user_id: localStorage.getItem('user_id'), // Dynamically get the logged-in user's ID
             vehicle_id: vehicle.id,
             test_drive_date: testDriveDate,
             test_drive_time: testDriveTime,

@@ -33,6 +33,7 @@ import EditVehicle from "./components/Admin/EditVehicle";
 import ComparisonList from "./components/User/ComparisonList";
 import MediaViewer from "./components/Admin/MediaViewer";
 import MediaViewerUser from "./components/User/MediaViewerUser";
+import ViewSchedule from "./components/User/ViewSchedule";
 
 
 // Layout Component
@@ -124,7 +125,7 @@ const App = () => {
           <Route path="/user-media-viewer" element={<MediaViewerUser />} />
           <Route path="/profile" element={<ProfilePage />} />
           <Route path="/Admin/ManageUsers" element={<ManageUsers />} />
-
+          <Route path="/ViewSchedule" element={<ViewSchedule />} />  
         </Routes>
         <ChatBot />
       </div>

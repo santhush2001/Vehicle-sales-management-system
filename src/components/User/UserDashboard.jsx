@@ -4,6 +4,8 @@ import { BiSolidSun, BiSolidMoon } from "react-icons/bi";
 import { HiMenuAlt3, HiMenuAlt1 } from "react-icons/hi";
 import { faUser } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCalendar } from "@fortawesome/free-solid-svg-icons"; // Ensure this exists
+
 
 const UserDashboard = () => {
   const [theme, setTheme] = useState(localStorage.getItem("userTheme") || "light");
@@ -65,6 +67,9 @@ const UserDashboard = () => {
   const handleProfileClick = () => {
     navigate("/profile");  // Navigate to the profile page
   };
+  const handleScheduleClick = () => {
+    navigate("/ViewSchedule"); // Navigate to the ViewSchedule component
+  };
 
 
   const toggleTheme = () => {
@@ -108,6 +113,7 @@ const UserDashboard = () => {
       setComparisonList([...comparisonList, vehicle]);
     }
   };
+  
 
   const filteredVehicles = vehicles.filter((vehicle) => {
     const matchMake = selectedFilter === "All" || vehicle.make === selectedFilter;
@@ -149,6 +155,12 @@ const UserDashboard = () => {
             onClick={handleProfileClick}  // Handle profile click
             title="Profile"
           />
+          <FontAwesomeIcon
+          icon={faCalendar}
+          className="text-2xl cursor-pointer"
+          onClick={handleScheduleClick} // Navigate to ViewSchedule
+          title="View Schedule"
+        />
           {/* Menu and Theme Toggle */}
           <div className="md:hidden">
             {menuOpen ? (
