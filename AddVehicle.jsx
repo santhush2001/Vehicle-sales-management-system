@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { BiSolidSun, BiSolidMoon } from "react-icons/bi";
 import { HiMenuAlt3, HiMenuAlt1 } from "react-icons/hi"; // Icons for responsive menu
+import { FaUser } from "react-icons/fa"; // Import user icon
+
 
 const AddVehicle = () => {
   const [theme, setTheme] = useState(localStorage.getItem("adminTheme") || "dark");
@@ -76,6 +78,9 @@ const AddVehicle = () => {
     localStorage.removeItem("role");
     navigate("/signin");
   };
+  const handleAdminProfileClick = () => {
+    navigate("/Adminprofile");  // Navigate to the profile page
+  };
 
   return (
     <div
@@ -143,8 +148,13 @@ const AddVehicle = () => {
               : "text-black bg-blue-400 hover:bg-blue-300"
               }`}
           >
-           Appointments
+            Appoinments
           </button>
+          <FaUser
+            onClick={handleAdminProfileClick}
+            className="text-2xl cursor-pointer transition-all duration-300 hover:text-gray-300"
+            title="Profile"
+          />
           {theme === "dark" ? (
             <BiSolidSun
               onClick={toggleTheme}
@@ -191,7 +201,7 @@ const AddVehicle = () => {
             Manage Users
           </button>
           <button onClick={() => navigate("/Admin/Appointments")} className="py-2 text-lg">
-            Appointments
+            Appoinments
           </button>
           <div onClick={toggleTheme} className="flex items-center gap-2 py-2 cursor-pointer">
             {theme === "dark" ? (

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { BiSolidSun, BiSolidMoon } from "react-icons/bi";
 import { HiMenuAlt3, HiMenuAlt1 } from "react-icons/hi";
+import { FaUser } from "react-icons/fa"; // Import user icon
 import axios from "axios"; // For API calls
 
 const AdminDashboard = () => {
@@ -45,6 +46,10 @@ const AdminDashboard = () => {
 
   const toggleDropdown = () => {
     setDropdownOpen(!dropdownOpen);
+  };
+
+  const handleAdminProfileClick = () => {
+    navigate("/Adminprofile");  // Navigate to the profile page
   };
 
   return (
@@ -113,6 +118,14 @@ const AdminDashboard = () => {
           >
             Appointments
           </button>
+
+          {/* User Profile Icon */}
+          <FaUser
+            onClick={handleAdminProfileClick}
+            className="text-2xl cursor-pointer transition-all duration-300 hover:text-gray-300"
+            title="Profile"
+          />
+
           {theme === "dark" ? (
             <BiSolidSun
               onClick={toggleTheme}
@@ -126,6 +139,7 @@ const AdminDashboard = () => {
               title="Switch to Dark Mode"
             />
           )}
+
           <button
             onClick={handleLogout}
             className={`px-4 py-2 rounded-full text-white ${theme === "dark" ? "bg-red-600 hover:bg-red-500" : "bg-red-400 hover:bg-red-300"
@@ -222,18 +236,18 @@ const AdminDashboard = () => {
             >
               <h4 className="text-lg font-semibold">User Engagement</h4>
               <div className="mt-2 h-2 bg-gray-300 rounded-full overflow-hidden">
-                <div className="h-full bg-green-500 rounded-full" style={{ width: "85%" }}></div>
+                <div className="h-full bg-green-500 rounded-full" style={{ width: "60%" }}></div>
               </div>
-              <p className="text-sm mt-2">85% active users this week</p>
+              <p className="text-sm mt-2">60% of users are actively using the platform</p>
             </div>
           </div>
         </section>
       </main>
       {/* Footer */}
-      <footer
-        className={`p-4 text-center ${theme === "dark" ? "bg-gray-800 text-white" : "bg-gray-200 text-gray-900"}`}
-      >
-        <p className="text-sm">&copy; {new Date().getFullYear()} Vehicle Management System. All rights reserved.</p>
+      <footer className={`p-6 text-center ${theme === 'dark' ? 'bg-gray-800 text-white' : 'bg-gray-200 text-black'}`}>
+        <p className="text-sm">
+          &copy; {new Date().getFullYear()} DriveLine. All rights reserved.
+        </p>
       </footer>
     </div>
   );

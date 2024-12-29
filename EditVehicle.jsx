@@ -295,7 +295,6 @@ const EditVehicle = () => {
                 >
                   <option value="New">New</option>
                   <option value="Used">Used</option>
-                  <option value="Certified">Certified</option>
                 </select>
               </div>
             </div>
@@ -334,9 +333,10 @@ const EditVehicle = () => {
                 onChange={handleChange}
                 className={`w-full p-3 border rounded-md ${theme === "dark" ? "bg-gray-700 text-white" : "bg-white text-gray-900"} shadow-md`}
               >
-                <option value="Gasoline">Gasoline</option>
-                <option value="Diesel">Diesel</option>
-                <option value="Electric">Electric</option>
+              <option value="Petrol">Petrol</option>
+              <option value="Diesel">Diesel</option>
+              <option value="Electric">Electric</option>
+              <option value="Hybrid">Hybrid</option>
               </select>
             </div>
 

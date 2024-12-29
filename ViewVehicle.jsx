@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { BiSolidSun, BiSolidMoon } from "react-icons/bi";
 import { HiMenuAlt3, HiMenuAlt1 } from "react-icons/hi";
+import { FaUser } from "react-icons/fa"; // Import user icon
+
 
 const ViewVehicle = () => {
   const [theme, setTheme] = useState(localStorage.getItem("adminTheme") || "dark");
@@ -49,6 +51,10 @@ const ViewVehicle = () => {
     setSelectedFilter(event.target.value);
   };
 
+  const handleAdminProfileClick = () => {
+    navigate("/Adminprofile");  // Navigate to the profile page
+  };
+
   const filteredVehicles = selectedFilter === "All"
     ? vehicles
     : vehicles.filter((vehicle) => vehicle.make === selectedFilter);
@@ -80,7 +86,7 @@ const ViewVehicle = () => {
             )}
           </div>
           <button onClick={() => navigate("/Admin/ManageUsers")} className={`py-2 px-4 text-lg rounded-full transition-all duration-300 ${theme === "dark" ? "text-white bg-blue-600 hover:bg-blue-500" : "text-black bg-blue-400 hover:bg-blue-300"}`}>Manage Users</button>
-          <button onClick={() => navigate("/Admin/Appointments")} className={`py-2 px-4 text-lg rounded-full transition-all duration-300 ${theme === "dark" ? "text-white bg-blue-600 hover:bg-blue-500" : "text-black bg-blue-400 hover:bg-blue-300"}`}>Appointments</button>
+          <button onClick={() => navigate("/Admin/Appointments")} className={`py-2 px-4 text-lg rounded-full transition-all duration-300 ${theme === "dark" ? "text-white bg-blue-600 hover:bg-blue-500" : "text-black bg-blue-400 hover:bg-blue-300"}`}>Appoinments</button>
           {theme === "dark" ? (
             <BiSolidSun onClick={toggleTheme} className="text-2xl cursor-pointer transition-all duration-300 hover:text-gray-300" title="Switch to Light Mode" />
           ) : (
@@ -102,7 +108,12 @@ const ViewVehicle = () => {
           <button onClick={() => navigate("/admin-dashboard")} className="py-2 text-lg">Home</button>
           <button onClick={() => navigate("/vehicle")} className="py-2 text-lg">Manage Vehicle</button>
           <button onClick={() => navigate("/Admin/ManageUsers")} className="py-2 text-lg">Manage Users</button>
-          <button onClick={() => navigate("/reports")} className="py-2 text-lg">Reports</button>
+          <button onClick={() => navigate("/Admin/Appointments")} className="py-2 text-lg">Appoinments</button>
+          <FaUser
+            onClick={handleAdminProfileClick}
+            className="text-2xl cursor-pointer transition-all duration-300 hover:text-gray-300"
+            title="Profile"
+          />
           <div onClick={toggleTheme} className="flex items-center gap-2 py-2 cursor-pointer">
             {theme === "dark" ? <BiSolidSun className="text-2xl" title="Switch to Light Mode" /> : <BiSolidMoon className="text-2xl" title="Switch to Dark Mode" />}
           </div>

@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { BiSolidSun, BiSolidMoon } from "react-icons/bi"; // Icons for theme toggle
 import { HiMenuAlt1, HiMenuAlt3 } from "react-icons/hi"; // Icons for mobile menu
+import { FaUser } from "react-icons/fa"; // Import user icon
+
 
 const VehicleDetails = () => {
   const { id } = useParams(); // Get the vehicle ID from the route
@@ -69,6 +71,8 @@ const VehicleDetails = () => {
       });
       if (response.ok) {
         alert("Media uploaded successfully!");
+        window.location.reload();
+
         const data = await response.json();
         setVehicle((prevVehicle) => ({
           ...prevVehicle,
@@ -76,7 +80,7 @@ const VehicleDetails = () => {
         }));
 
         // Redirect to vehicle details page after successful upload
-        navigate(`/Vehicle-details/${id}`);
+
       } else {
         alert("Failed to upload media");
       }
@@ -116,6 +120,10 @@ const VehicleDetails = () => {
   const handleLogout = () => {
     localStorage.removeItem("adminTheme");
     navigate("/login"); // Assuming there's a login page for the admin
+  };
+
+  const handleAdminProfileClick = () => {
+    navigate("/Adminprofile");  // Navigate to the profile page
   };
 
   if (loading) {
@@ -189,8 +197,13 @@ const VehicleDetails = () => {
               : "text-black bg-blue-400 hover:bg-blue-300"
               }`}
           >
-            Appointments
+            Appoinments
           </button>
+          <FaUser
+            onClick={handleAdminProfileClick}
+            className="text-2xl cursor-pointer transition-all duration-300 hover:text-gray-300"
+            title="Profile"
+          />
           {theme === "dark" ? (
             <BiSolidSun
               onClick={toggleTheme}
