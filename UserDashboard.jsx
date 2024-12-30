@@ -358,7 +358,7 @@ const UserDashboard = () => {
                   </p>
                   <p className="flex justify-between">
                     <span className="text-gray-500">Price:</span>
-                    <span className="font-medium">Lkr.{vehicle.price.toLocaleString()}</span>
+                    <span className="font-medium">Rs.{vehicle.price.toLocaleString()}</span>
                   </p>
                   <p className="flex justify-between">
                     <span className="text-gray-500">Mileage:</span>

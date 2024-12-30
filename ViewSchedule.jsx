@@ -186,6 +186,33 @@ const ViewSchedule = () => {
     );
   }
 
+  const handleDateChange = (e) => {
+    const selectedDate = new Date(e.target.value);
+    const currentDate = new Date();
+
+    // Check if selected date is in the past
+    if (selectedDate < currentDate.setHours(0, 0, 0, 0)) {
+      alert("You cannot select a past date.");
+      setTestDriveDate(""); // Reset the invalid date
+      return;
+    }
+    setTestDriveDate(e.target.value);
+  };
+
+  // Ensure past times are not selectable in the time picker
+  const handleTimeChange = (e) => {
+    const currentDate = new Date();
+    const selectedDate = new Date(`${testDriveDate}T${e.target.value}`);
+
+    // Check if the selected time is in the past
+    if (testDriveDate && selectedDate < currentDate) {
+      alert("You cannot select a past time.");
+      setTestDriveTime(""); // Reset the invalid time
+      return;
+    }
+    setTestDriveTime(e.target.value);
+  };
+
   return (
     <div className={`min-h-screen ${theme === "dark" ? "bg-gray-900 text-white" : "bg-gray-50 text-gray-900"}`}>
       {/* Header */}
@@ -315,23 +342,59 @@ const ViewSchedule = () => {
               <div className="space-y-4">
                 <div>
                   <label className="block text-sm font-medium mb-2">Date</label>
-                  <input
-                    type="date"
-                    value={editData.date}
-                    onChange={(e) => setEditData({ ...editData, date: e.target.value })}
-                    className={`w-full p-2 rounded-lg border ${theme === "dark" ? "bg-gray-700 border-gray-600" : "bg-gray-50 border-gray-300"}`}
-                  />
+                  <div>
+                    <label className="block text-sm font-medium mb-2">Date</label>
+                    <input
+                      type="date"
+                      value={editData.date}
+                      onChange={(e) => {
+                        const selectedDate = new Date(e.target.value);
+                        const currentDate = new Date();
+
+                        // Reset time to 00:00:00 for accurate comparison
+                        currentDate.setHours(0, 0, 0, 0);
+
+                        if (selectedDate < currentDate) {
+                          alert("You cannot select a past date.");
+                          setEditData({ ...editData, date: "" }); // Reset the invalid date
+                          return;
+                        }
+                        setEditData({ ...editData, date: e.target.value });
+                      }}
+                      className={`w-full p-2 rounded-lg border ${theme === "dark" ? "bg-gray-700 border-gray-600" : "bg-gray-50 border-gray-300"
+                        }`}
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block text-sm font-medium mb-2">Time</label>
+                    <input
+                      type="time"
+                      value={editData.time}
+                      onChange={(e) => {
+                        const currentDate = new Date();
+                        const selectedDate = new Date(`${editData.date}T${e.target.value}`);
+
+                        if (!editData.date) {
+                          alert("Please select a date first.");
+                          setEditData({ ...editData, time: "" });
+                          return;
+                        }
+
+                        if (selectedDate < currentDate) {
+                          alert("You cannot select a past time.");
+                          setEditData({ ...editData, time: "" }); // Reset the invalid time
+                          return;
+                        }
+                        setEditData({ ...editData, time: e.target.value });
+                      }}
+                      className={`w-full p-2 rounded-lg border ${theme === "dark" ? "bg-gray-700 border-gray-600" : "bg-gray-50 border-gray-300"
+                        }`}
+                    />
+                  </div>
+
                 </div>
 
-                <div>
-                  <label className="block text-sm font-medium mb-2">Time</label>
-                  <input
-                    type="time"
-                    value={editData.time}
-                    onChange={(e) => setEditData({ ...editData, time: e.target.value })}
-                    className={`w-full p-2 rounded-lg border ${theme === "dark" ? "bg-gray-700 border-gray-600" : "bg-gray-50 border-gray-300"}`}
-                  />
-                </div>
 
                 <div>
                   <label className="block text-sm font-medium mb-2">Note</label>

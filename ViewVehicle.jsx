@@ -139,7 +139,7 @@ const ViewVehicle = () => {
             <div key={vehicle.id} className="border p-4 rounded hover:shadow-lg transition-shadow duration-300 transform hover:scale-105">
               <h3 className="text-xl font-semibold">{vehicle.make} {vehicle.model}</h3>
               <p><strong>Year:</strong> {vehicle.year}</p>
-              <p><strong>Price:</strong> Lkr.{vehicle.price}</p>
+              <p><strong>Price:</strong> Rs.{vehicle.price}</p>
               <p><strong>Mileage:</strong> {vehicle.mileage} miles</p>
               {vehicle.image && (
                 <div className="mt-2 overflow-hidden rounded-lg shadow-md">
