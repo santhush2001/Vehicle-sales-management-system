@@ -50,7 +50,7 @@ const carList = [
     category: "Double-Cab",
     aosDelay: "1000",
   },
-   {
+  {
     image: car9,
     category: "Dozer",
     aosDelay: "1000",
@@ -59,51 +59,56 @@ const carList = [
 
 const CarList = () => {
   return (
-    <div className="pb-24">
-      <div className="container">
+    <div id="carlist" className="py-16 bg-gradient-to-b from-transparent to-gray-50 dark:to-gray-900/50">
+      <div className="container px-4 mx-auto">
         {/* Heading */}
-        <h1
-          data-aos="fade-up"
-          className="text-3xl sm:text-4xl font-semibold font-serif mb-3"
-        >
-          Vehicle Category
-        </h1>
-        <p data-aos="fade-up" aos-delay="400" className="text-sm pb-10">
-          Our website offers sales across all vehicle categories, providing a
-          wide range of options to suit every need and preference.
-        </p>
+        <div className="text-center max-w-2xl mx-auto mb-16">
+          <h1
+            data-aos="fade-up"
+            className="text-4xl sm:text-5xl font-bold mb-4 bg-gradient-to-r from-primary to-blue-600 bg-clip-text text-transparent"
+          >
+            Vehicle Category
+          </h1>
+
+          <p
+            data-aos="fade-up"
+            data-aos-delay="400"
+            className="text-base sm:text-lg text-gray-600 dark:text-gray-300"
+          >
+            Our website offers sales across all vehicle categories, providing a
+            wide range of options to suit every need and preference.
+          </p>
+        </div>
+
         {/* Car listing */}
-        <div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-16">
-            {carList.map((data) => (
-              <div
-                key={data.name}
-                data-aos="fade-up"
-                data-aos-delay={data.aosDelay}
-                className="space-y-3 border-2 border-gray-300 hover:border-primary p-3 rounded-xl relative group"
-              >
-                <div className="w-full h-[120px]">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+          {carList.map((data) => (
+            <div
+              key={data.category}
+              data-aos="fade-up"
+              data-aos-delay={data.aosDelay}
+              className="group relative overflow-hidden rounded-2xl bg-white dark:bg-gray-800 shadow-lg hover:shadow-xl dark:shadow-gray-900/50 transition-all duration-300 hover:-translate-y-1"
+            >
+              <div className="absolute inset-0 bg-gradient-to-r from-primary/10 to-blue-600/10 dark:from-primary/20 dark:to-blue-600/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+
+              <div className="p-6">
+                <div className="h-40 mb-6 relative">
                   <img
                     src={data.image}
-                    alt={data.name}
-                    className="w-full h-[120px] object-contain sm:translate-x-8 group-hover:sm:translate-x-16 duration-700"
+                    alt={data.category}
+                    className="w-full h-full object-contain transform group-hover:scale-110 transition-transform duration-500"
                   />
                 </div>
-                <div className="space-y-2">
-                  <h1 className="text-primary font-semibold">{data.name}</h1>
-                  <div className="flex justify-between items-center text-xl font-semibold">
-                    <span>{data.category}</span> {/* Display the category */}
-                  </div>
+
+                <div className="space-y-3">
+                  <h2 className="text-2xl font-bold text-gray-800 dark:text-white">
+                    {data.category}
+                  </h2>
+                  <div className="w-16 h-1 bg-primary rounded-full transform origin-left group-hover:scale-x-150 transition-transform duration-300" />
                 </div>
               </div>
-            ))}
-          </div>
-        </div>
-        {/* End of car listing */}
-        <div className="grid place-items-center mt-8">
-          <button data-aos="fade-up" className="button-outline">
-            Get Started
-          </button>
+            </div>
+          ))}
         </div>
       </div>
     </div>
