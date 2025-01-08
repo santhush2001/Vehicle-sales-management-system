@@ -1,0 +1,87 @@
+/* Container and section styling */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+}
+
+.sm\:grid-cols-2 {
+  grid-template-columns: 1fr 1fr;
+}
+
+.bg-gray-800 {
+  background-color: #2d2d2d;
+}
+
+.text-white {
+  color: #fff;
+}
+
+.text-gray-400 {
+  color: #b3b3b3;
+}
+
+.space-y-6 {
+  margin-bottom: 1.5rem;
+}
+
+.contact-info {
+  margin-top: 1rem;
+}
+
+.social-icons a {
+  transition: transform 0.3s;
+}
+
+.social-icons a:hover {
+  transform: scale(1.1);
+}
+
+/* Social media icons */
+.social-icons .text-white {
+  transition: color 0.3s;
+}
+
+.social-icons .text-white:hover {
+  transform: scale(1.1);
+}
+
+/* Form Styling */
+input, textarea {
+  width: 100%;
+  padding: 0.75rem;
+  border-radius: 0.375rem;
+  background-color: #333;
+  color: white;
+  border: 1px solid #444;
+}
+
+input::placeholder, textarea::placeholder {
+  color: #888;
+}
+
+button {
+  padding: 1rem;
+  border-radius: 0.375rem;
+  background-color: var(--primary);
+  text-transform: uppercase;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: var(--primary);
+  opacity: 0.9;
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}

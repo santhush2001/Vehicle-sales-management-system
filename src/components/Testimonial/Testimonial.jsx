@@ -2,21 +2,21 @@ import React from "react";
 
 const testimonialData = [
   {
-    name: "ABC",
+    name: "Dinitha ",
     image: "",
-    description: "Lorem ipsum dolor sit amet consectetur, adipisicing elit.",
+    description: "A seamless experience with top-notch service. Highly recommended!",
     aosDelay: "0",
   },
   {
-    name: "DEF",
+    name: "Santhusha",
     image: "",
-    description: "Lorem ipsum dolor sit amet consectetur, adipisicing elit.",
+    description: "Great selection and excellent customer service! Will definitely return.",
     aosDelay: "300",
   },
   {
-    name: "IJK",
+    name: "Kavinda",
     image: "",
-    description: "Lorem ipsum dolor sit amet consectetur, adipisicing elit.",
+    description: "Smooth process, and the staff made everything so easy. Highly satisfied!",
     aosDelay: "1000",
   },
 ];
@@ -35,8 +35,7 @@ const Testimonial = () => {
               What Our Clients Say About Us
             </p>
             <p data-aos="fade-up" className="text-center sm:px-44">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit.
-              Perferendis iure consectetur tempora amet.
+            Our clients trust us for delivering high-quality vehicles and exceptional service
             </p>
           </div>
 
